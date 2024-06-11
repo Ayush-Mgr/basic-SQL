@@ -1,0 +1,189 @@
+desc student
+
+-- THE NESTED QURIES 
+
+-- FINDING MAX FROM TABLE
+SELECT name , tot_cred
+FROM student
+where tot_cred =(SELECT MAX(tot_cred)
+FROM student)
+;
+
+--FINDING SEOND HIGEST FROM TABLE 
+
+SELECT name , MAX( tot_cred)
+FROM student
+where tot_cred != (SELECT MAX(tot_cred)
+FROM student)
+;
+
+------------------------------------------------------------------
+--GROUP BY
+
+SELECT dept_name , COUNT(dept_name)
+FROM student
+GROUP BY dept_name
+;
+
+-- less dep where students <  90 
+SELECT name ,dept_name , COUNT(dept_name)
+FROM student
+GROUP BY dept_name
+HAVING COUNT(dept_name) < 90
+;
+
+--higest tot_cred dep wise + name
+
+
+SELECT name, dept_name , MAX(tot_cred)
+FROM student
+GROUP BY dept_name
+;
+
+--
+ALTER department
+add CONSTRAINT fk_dpname
+Foreign Key (dept_name) REFERENCES student(dept_name);
+ 
+SELECT name , building
+FROM student,department
+WHERE building = 'Taylor';
+DESC student
+
+
+
+--- joints
+
+SELECT
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Active: 1717923047642@@127.0.0.1@3306@practice1
+-- creating Table 
+CREATE TABLE test_able(
+    texts VARCHAR(2),
+    nums INT
+);
+
+INSERT test_able(texts,nums) VALUES ('ab',12);
+
+select *
+FROM test_able;
+
+INSERT test_able(texts,nums) VALUES ('cd',34);
+INSERT test_able(texts,nums) VALUES ('ef',56);
+INSERT test_able(texts,nums) VALUES ('gh',78);
+INSERT test_able(texts,nums) VALUES ('ij',910);
+
+ALTER table test_able 
+ADD PRIMARY KEY(Sno); 
+
+
+
+
+SET @serial_number := 0;
+
+SET @serial_number := 0;
+
+UPDATE test_able
+SET Sno = (@serial_number := @serial_number + 1);
+
+DESC test_able;
+
+ALTER Table test_able MODIFY nums VARCHAR(2);
+
+--THIS IS THE BASICS QURIES OF SQL
+
+-- Create a table named test_table with two columns: texts and nums
+CREATE TABLE test_table (
+    texts VARCHAR(2),
+    nums INT
+);
+
+-- Insert a record into test_table
+INSERT INTO test_table (texts, nums) VALUES ('ab', 12);
+
+-- Insert multiple records into test_table
+INSERT INTO test_table (texts, nums) VALUES
+('cd', 34),
+('ef', 56),
+('gh', 78);
+
+
+-- Retrieve all records from test_table
+SELECT * FROM test_table;
+
+-- Retrieve records where nums is greater than 20
+SELECT * FROM test_table WHERE nums > 20;
+
+
+-- Update nums to 99 for the record where texts is 'ab'
+UPDATE test_table SET nums = 99 WHERE texts = 'ab';
+
+-- Update texts to 'xy' where nums is 34
+UPDATE test_table SET texts = 'xy' WHERE nums = 34;
+
+-- Delete the record where texts is 'ef'
+DELETE FROM test_table WHERE texts = 'ef';
+
+-- Delete all records from test_table
+DELETE FROM test_table;
+
+-- Drop the test_table
+DROP TABLE test_table;
+
+
+-- Create a table with more columns and different data types
+CREATE TABLE complex_table (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT,
+    email VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Insert a record into complex_table
+INSERT INTO complex_table (id, name, age, email) VALUES (1, 'John Doe', 30, 'john.doe@example.com');
+
+-- Insert multiple records into complex_table
+INSERT INTO complex_table (id, name, age, email) VALUES
+(2, 'Jane Smith', 25, 'jane.smith@example.com'),
+(3, 'Alice Johnson', 28, 'alice.johnson@example.com');
+
+
+-- Retrieve all records from complex_table
+SELECT * FROM complex_table;
+
+-- Retrieve records where age is greater than 25
+SELECT * FROM complex_table WHERE age > 25;
+
+-- Retrieve specific columns from complex_table
+SELECT name, email FROM complex_table;
+
+-- Update age to 35 for the record where id is 1
+UPDATE complex_table SET age = 35 WHERE id = 1;
+
+-- Update email for the record where name is 'Jane Smith'
+UPDATE complex_table SET email = 'jane.smith@newdomain.com' WHERE name = 'Jane Smith';
+
+
+-- Delete the record where id is 3
+DELETE FROM complex_table WHERE id = 3;
+
+-- Delete all records from complex_table
+DELETE FROM complex_table;
+
+
+-- Drop the complex_table
+DROP TABLE complex_table;
